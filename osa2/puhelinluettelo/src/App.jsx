@@ -42,7 +42,13 @@ const App = () => {
           setNewNumber('')
         })
         .catch(error => { 
-          console.log(error)
+          console.log(error.response.data.error)
+          setMessage(error.response.data.error)
+          setIsError(true)
+          setTimeout(() => {
+            setMessage(null)
+            setIsError(false)
+          }, 5000)
         })
       setMessage(`Added ${personObject.name}`)        
       setTimeout(() => {
@@ -60,7 +66,7 @@ const App = () => {
         .remove(person.id)
         .then(returnedPerson => {
           console.log(returnedPerson)
-          setPersons(persons.filter(person => person.id !== returnedPerson.id))
+          setPersons(persons.filter(p => p.id !== person.id))
         }
         )
         .catch(error => {
