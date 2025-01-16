@@ -1,0 +1,6 @@
+POST http://localhost:3003/api/blogs 
+Content-Type: application/json
+
+{
+"title": "tyko chronicles", "author": "TYKO", "url": "abc.io", "likes": 2
+}
