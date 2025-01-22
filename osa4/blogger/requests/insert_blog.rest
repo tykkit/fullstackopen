@@ -1,6 +1,7 @@
 POST http://localhost:3003/api/blogs 
 Content-Type: application/json
+//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InR5a290dHR0aSIsImlkIjoiNjc5MGMyYTg2YTIwMWYyZGQ2ODZjMDdmIiwiaWF0IjoxNzM3NTU4MTg4fQ.U8HS5tn1rPRjkaTsYzVDmIC8L9nqbEYHIob4wJ38ih0
 
 {
-"title": "tyko chronicles", "author": "TYKO", "url": "abc.io", "likes": 2
+"title": "tykkit chronicles", "author": "TYKO", "url": "abc.io", "likes": 2, "userId": "678fc4a30e5c6715dd136077"
 }
