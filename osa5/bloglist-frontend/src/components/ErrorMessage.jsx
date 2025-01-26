@@ -1,4 +1,4 @@
-const ErrorMessage = ({message}) => {
+const ErrorMessage = ({ message }) => {
   const messageStyle = {
     color: 'red',
     background: 'lightgrey',
@@ -12,12 +12,12 @@ const ErrorMessage = ({message}) => {
   if (!message) {
     return(null)
   }
-  
+
   return (
     <div style={messageStyle}>
       {message}
     </div>
-)}
+  )}
 
 
 export default ErrorMessage
