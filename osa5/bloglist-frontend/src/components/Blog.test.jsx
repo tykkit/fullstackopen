@@ -33,11 +33,11 @@ test('clicking blog show button shows the detailed information of the blog', asy
   const mockAddLikeHandler = vi.fn()
 
   const mockRemoveBlogHandler = vi.fn()
-  
+
   const { container } = render(
-    <Blog 
-      blog={blog} 
-      likeHandler={mockAddLikeHandler} 
+    <Blog
+      blog={blog}
+      likeHandler={mockAddLikeHandler}
       removeHandler={mockRemoveBlogHandler}
     />
   )
@@ -64,11 +64,11 @@ test('clicking like button twice triggers the like event handler twice', async (
   const mockAddLikeHandler = vi.fn()
 
   const mockRemoveBlogHandler = vi.fn()
-  
+
   const { container } = render(
-    <Blog 
-      blog={blog} 
-      likeHandler={mockAddLikeHandler} 
+    <Blog
+      blog={blog}
+      likeHandler={mockAddLikeHandler}
       removeHandler={mockRemoveBlogHandler}
     />
   )
