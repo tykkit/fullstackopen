@@ -26,19 +26,22 @@ const BlogForm = ({ createBlog }) => {
           title:
           <input
             value={title}
-            onChange={event => setTitle(event.target.value)}/>
+            onChange={event => setTitle(event.target.value)}
+            placeholder='title of the blog'/>
         </div>
         <div>
           author:
           <input
             value={author}
-            onChange={event => setAuthor(event.target.value)}/>
+            onChange={event => setAuthor(event.target.value)}
+            placeholder='author of the blog'/>
         </div>
         <div>
           url:
           <input
             value={url}
-            onChange={event => setUrl(event.target.value)}/>
+            onChange={event => setUrl(event.target.value)}
+            placeholder='url to the blog'/>
         </div>
         <button type="submit">create</button>
       </form>
@@ -46,7 +49,7 @@ const BlogForm = ({ createBlog }) => {
   )
 }
 
-BlogForm.PropTypes = {
+BlogForm.propTypes = {
   createBlog: PropTypes.func.isRequired
 }
 

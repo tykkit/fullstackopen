@@ -30,13 +30,13 @@ const Blog = ({ blog, likeHandler, removeHandler, currentUser }) => {
     ? 'view'
     : 'hide'
 
-  const showDelButton = !(currentUser.username === blog.user.username)
+  const showDelButton = !currentUser || !(currentUser.username === blog.user.username)
     ? { display: 'none' }
     : { display: '' }
 
   if (!showData) {
     return(
-      <div style={blogStyle}>
+      <div style={blogStyle} className='blogHidden'>
         <div>
           {blog.title} {blog.author}
           <button onClick={toggleData}>{buttonText}</button>
@@ -46,7 +46,7 @@ const Blog = ({ blog, likeHandler, removeHandler, currentUser }) => {
   }
 
   return(
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blogShown'>
       <div>
         {blog.title} {blog.author}
         <button onClick={toggleData}>{buttonText}</button>
@@ -65,11 +65,8 @@ const Blog = ({ blog, likeHandler, removeHandler, currentUser }) => {
     </div>
   )}
 
-Blog.PropTypes = {
-  blog: PropTypes.object.isRequired,
-  currentUser: PropTypes.object.isRequired,
-  likeHandler: PropTypes.func.isRequired,
-  removeHandler: PropTypes.func.isRequired
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired
 }
 
 export default Blog
