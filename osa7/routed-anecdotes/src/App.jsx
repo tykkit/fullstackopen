@@ -4,6 +4,7 @@ import Anecdote from './components/Anecdote'
 import AnecdoteList from './components/AnecdoteList'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
+import { useField } from './hooks'
 import {
   BrowserRouter as Router,
   Routes, Route, Link,
@@ -24,21 +25,35 @@ const Menu = () => {
 }
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+  const content = useField('text')
+  const author = useField('text')
+  const info = useField('text')
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
-      content,
-      author,
-      info,
+      content: content.value,
+      author: author.value,
+      info: info.value,
       votes: 0
     })
     navigate('/')
   }
+
+  const handleReset = (e) => {
+    e.preventDefault()
+    console.log('reset is pressed')
+    content.reset()
+    author.reset()
+    info.reset()
+  }
+
+  const inputProps = (object) => ({
+    type: object.type,
+    value: object.value,
+    onChange: object.onChange
+  })
 
   return (
     <div>
@@ -46,17 +61,18 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          <input {...inputProps(content)} />
         </div>
         <div>
           author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input {...inputProps(author)} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          <input {...inputProps(info)} />
         </div>
         <button>create</button>
+        <button onClick={handleReset} type='reset'>reset</button>
       </form>
     </div>
   )
