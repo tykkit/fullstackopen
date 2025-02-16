@@ -1,23 +1,29 @@
-const Message = ({ message }) => {
-  const messageStyle = {
-    color: 'green',
-    background: 'lightgrey',
-    fontSize: '20px',
-    borderStyle: 'solid',
-    borderRadius: '5px',
-    padding: '10px',
-    marginBottom: '10px'
-  }
+import { useNotificationDispatch, useNotificationValue } from '../reducers/NotificationContext'
+import { Alert } from 'react-bootstrap'
+
+const Message = () => {
+  const message = useNotificationValue()
+  const dispatch = useNotificationDispatch()
 
   if (!message) {
-    return(null)
+    return null
   }
 
-  return (
-    <div style={messageStyle} className="message">
-      {message}
-    </div>
-  )}
+  if (message) {
+    setTimeout(() => {
+      dispatch({ type: 'RESET' })
+    }, 5000)
+  }
 
+  const styleIfError = !message.isError
+    ? 'success'
+    : 'danger'
+
+  return (
+    <Alert variant={styleIfError} className="message">
+      {message.message}
+    </Alert>
+  )
+}
 
 export default Message

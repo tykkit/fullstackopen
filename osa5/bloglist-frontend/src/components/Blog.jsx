@@ -1,72 +1,78 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
+import { useNotificationDispatch } from '../reducers/NotificationContext'
 
-const Blog = ({ blog, likeHandler, removeHandler, currentUser }) => {
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
+const Blog = ({ blog, likeHandler, removeHandler, currentUser, commentHandler }) => {
+  const [comment, setComment] = useState('')
+  const notifDispatch = useNotificationDispatch()
+
+  if (!blog) {
+    return null
   }
-
-  const [showData, setShowData] = useState(false)
-
-  const toggleData = () => {
-    setShowData(!showData)
-  }
-
   const manageLike = (event) => {
     event.preventDefault()
-    likeHandler(blog)
+    likeHandler.mutate(blog)
   }
+
+  const comments = blog.comments
+    ? blog.comments
+    : null
 
   const deleteBlog = (event) => {
     event.preventDefault()
-    removeHandler(blog)
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`))
+      removeHandler.mutate(blog.id)
   }
 
-  const buttonText = !showData
-    ? 'view'
-    : 'hide'
-
-  const showDelButton = !currentUser || !(currentUser.username === blog.user.username)
-    ? { display: 'none' }
-    : { display: '' }
-
-  if (!showData) {
-    return(
-      <div style={blogStyle} className='blogHidden'>
-        <div>
-          {blog.title} {blog.author}
-          <button onClick={toggleData}>{buttonText}</button>
-        </div>
-      </div>
-    )
+  const addComment = (event) => {
+    event.preventDefault()
+    const newComment = {
+      blog: blog.id,
+      content: comment
+    }
+    commentHandler.mutate(newComment)
+    console.log('added', comment)
+    notifDispatch({
+      type: 'SET_NOTIFICATION',
+      payload: {
+        message: `added comment ${comment} to blog ${blog.title}`
+      }
+    })
+    setComment('')
   }
 
-  return(
-    <div style={blogStyle} className='blogShown'>
-      <div>
+  const showDelButton =
+    !currentUser || !(currentUser.username === blog.user.username)
+      ? { display: 'none' }
+      : { display: '' }
+
+  return (
+    <div>
+      <h2>
         {blog.title} {blog.author}
-        <button onClick={toggleData}>{buttonText}</button>
-      </div>
+      </h2>
+      <div>{blog.url}</div>
       <div>
-        {blog.url}
-      </div>
-      <div>
-        likes {blog.likes}
+        {blog.likes} likes
         <button onClick={manageLike}>like</button>
       </div>
-      <div>
-        {blog.user.name}
-      </div>
-      <button style={showDelButton} onClick={deleteBlog}>remove</button>
+      <div>added by {blog.user.name}</div>
+      <button style={showDelButton} onClick={deleteBlog}>
+        remove
+      </button>
+      <h3>Comments</h3>
+      <form onSubmit={addComment}>
+        <input value={comment} onChange={(event) => setComment(event.target.value)}/>
+        <button type='submit'>add comment</button>
+      </form>
+      <ul>
+        {comments &&
+          comments.map(comment =>
+            <li key={comment.id}>{comment.content}</li>
+          )
+        }
+      </ul>
     </div>
-  )}
-
-Blog.propTypes = {
-  blog: PropTypes.object.isRequired
+  )
 }
 
 export default Blog
