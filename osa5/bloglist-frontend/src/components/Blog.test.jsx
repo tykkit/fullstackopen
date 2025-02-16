@@ -7,7 +7,7 @@ test('renders only title and author of the blog naturally', () => {
   const blog = {
     title: 'tykolentti',
     author: 'tyko',
-    url: 'tyko.io'
+    url: 'tyko.io',
   }
 
   const { container } = render(<Blog blog={blog} />)
@@ -26,8 +26,8 @@ test('clicking blog show button shows the detailed information of the blog', asy
     url: 'tyko.io',
     user: {
       id: '123123124124',
-      name: 'tykki t'
-    }
+      name: 'tykki t',
+    },
   }
 
   const mockAddLikeHandler = vi.fn()
@@ -57,8 +57,8 @@ test('clicking like button twice triggers the like event handler twice', async (
     url: 'tyko.io',
     user: {
       id: '123123124124',
-      name: 'tykki t'
-    }
+      name: 'tykki t',
+    },
   }
 
   const mockAddLikeHandler = vi.fn()
@@ -86,7 +86,7 @@ test('clicking like button twice triggers the like event handler twice', async (
 test('blog form handled correctly', async () => {
   const user = userEvent.setup()
   const mockCreate = vi.fn()
-  render(<BlogForm createBlog={mockCreate}/>)
+  render(<BlogForm createBlog={mockCreate} />)
 
   const titleInput = screen.getByPlaceholderText('title of the blog')
   const authorInput = screen.getByPlaceholderText('author of the blog')

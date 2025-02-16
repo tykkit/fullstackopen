@@ -1,0 +1,7 @@
+POST http://localhost:3003/api/blogs/679690438aa35f6ef2135696/comments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InR5a290dHR0aSIsImlkIjoiNjc5MGMyYTg2YTIwMWYyZGQ2ODZjMDdmIiwiaWF0IjoxNzM3NTY0Mzc4fQ.Y_spJUUEXifo_tQiMbuni_uZM8fLg-oGH0qarcma_4o
+
+{
+"content": "nice blog"
+}

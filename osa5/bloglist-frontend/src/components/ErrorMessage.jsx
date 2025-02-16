@@ -6,18 +6,18 @@ const ErrorMessage = ({ message }) => {
     borderStyle: 'solid',
     borderRadius: '5px',
     padding: '10px',
-    marginBottom: '10px'
+    marginBottom: '10px',
   }
 
   if (!message) {
-    return(null)
+    return null
   }
 
   return (
     <div style={messageStyle} className="error">
       {message}
     </div>
-  )}
-
+  )
+}
 
 export default ErrorMessage
